@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import {
   mockKecamatan,
   mockDesa,
@@ -47,12 +47,14 @@ export const useStuntingStore = defineStore('stunting', () => {
   // GIS Map Layer Settings
   const activeBasemap = ref('dark') // 'dark' | 'osm' | 'satellite' | 'terrain' | 'light'
   const showChoropleth = ref(true)
-  const choroplethLevel = ref('desa') // 'kecamatan' | 'desa' | 'provinsi'
+  const choroplethLevel = ref('provinsi') // 'kecamatan' | 'desa' | 'provinsi' | 'kabupaten'
   const showHeatmap = ref(false)
   const showMarkers = ref(true)
   const showCluster = ref(true)
-  const showPuskesmasBuffer = ref(true)
-  const bufferRadiusKm = ref(3)
+
+  // GeoJSON Region Filter — controls which province/kabupaten to render for kecamatan & desa
+  const mapFilterProvince = ref('Jawa Barat')
+  const mapFilterKabupaten = ref('Kota Depok')
 
   // Selection & Modal States
   const selectedBalita = ref(null)
@@ -64,8 +66,12 @@ export const useStuntingStore = defineStore('stunting', () => {
   // Data Loading & Map State
   const geoJsonData = ref(null)
   const geoJsonRegencies = ref(null)
+  const geoJsonDistricts = ref(null)
+  const geoJsonVillages = ref(null)
   const isLoading = ref(false)
   const mapInstance = ref(null)
+
+
 
   // Baseline Relational Data
   const kecamatanList = ref(mockKecamatan)
@@ -241,24 +247,128 @@ export const useStuntingStore = defineStore('stunting', () => {
   })
 
   // Actions
+
+  // Precomputed bounding box spatial index — avoids recalculating on every moveend
+  const featureBBoxIndex = new Map()
+
+  function precomputeFeatureBBox(geojson) {
+    if (!geojson || !geojson.features) return
+    for (const feature of geojson.features) {
+      if (featureBBoxIndex.has(feature)) continue
+      const geom = feature.geometry
+      if (!geom) continue
+      let coords = []
+      if (geom.type === 'Polygon') {
+        coords = geom.coordinates[0] || []
+      } else if (geom.type === 'MultiPolygon') {
+        coords = geom.coordinates[0] ? geom.coordinates[0][0] : []
+      }
+      if (coords.length === 0) {
+        featureBBoxIndex.set(feature, null)
+        continue
+      }
+      let minLng = Infinity, maxLng = -Infinity, minLat = Infinity, maxLat = -Infinity
+      const step = Math.max(1, Math.floor(coords.length / 8))
+      for (let i = 0; i < coords.length; i += step) {
+        const pt = coords[i]
+        if (pt[0] < minLng) minLng = pt[0]
+        if (pt[0] > maxLng) maxLng = pt[0]
+        if (pt[1] < minLat) minLat = pt[1]
+        if (pt[1] > maxLat) maxLat = pt[1]
+      }
+      featureBBoxIndex.set(feature, [minLat, minLng, maxLat, maxLng])
+    }
+  }
+
+  // Progressive loader — loads Provinsi + Kabupaten from local public/data/
   async function loadGeoJson() {
     if (geoJsonData.value && geoJsonRegencies.value) return
     isLoading.value = true
     try {
+      const promises = []
       if (!geoJsonData.value) {
-        const response = await fetch('/data/indonesia-provinces.geojson')
-        geoJsonData.value = await response.json()
+        promises.push(
+          fetch('/data/gadm41_IDN_1.json')
+            .then(r => r.json())
+            .then(data => {
+              geoJsonData.value = data
+              precomputeFeatureBBox(data)
+            })
+        )
       }
       if (!geoJsonRegencies.value) {
-        const responseReg = await fetch('/data/indonesia-regencies.geojson')
-        geoJsonRegencies.value = await responseReg.json()
+        promises.push(
+          fetch('/data/gadm41_IDN_2.json')
+            .then(r => r.json())
+            .then(data => {
+              geoJsonRegencies.value = data
+              precomputeFeatureBBox(data)
+            })
+        )
       }
+      await Promise.all(promises)
     } catch (error) {
       console.error('Failed to load GeoJSON:', error)
     } finally {
       isLoading.value = false
     }
   }
+
+  let geojsonWorker = null
+  if (typeof window !== 'undefined') {
+    geojsonWorker = new Worker('/data/geojsonWorker.js')
+    
+    geojsonWorker.onmessage = (e) => {
+      const { success, type, data, error } = e.data
+      isLoading.value = false
+      if (!success) {
+        console.error(`GeoJSON worker failed for ${type}:`, error)
+        return
+      }
+      if (type === 'kecamatan') {
+        geoJsonDistricts.value = data
+        precomputeFeatureBBox(data)
+      } else if (type === 'desa') {
+        geoJsonVillages.value = data
+        precomputeFeatureBBox(data)
+      }
+    }
+  }
+
+  watch(mapFilterProvince, (newVal) => {
+    if (geojsonWorker) {
+      isLoading.value = true
+      geojsonWorker.postMessage({ type: 'kecamatan', filterVal: newVal })
+    }
+  })
+
+  watch(mapFilterKabupaten, (newVal) => {
+    if (geojsonWorker) {
+      isLoading.value = true
+      geojsonWorker.postMessage({ type: 'desa', filterVal: newVal })
+    }
+  })
+
+  // On-demand lazy loader for Kecamatan (filtered by mapFilterProvince)
+  async function loadKecamatanGeoJson() {
+    if (geoJsonDistricts.value || isLoading.value) return
+    isLoading.value = true
+    if (geojsonWorker) {
+      geojsonWorker.postMessage({ type: 'kecamatan', filterVal: mapFilterProvince.value })
+    }
+  }
+
+  // On-demand lazy loader for Kelurahan/Desa (filtered by mapFilterKabupaten)
+  async function loadKelurahanGeoJson() {
+    if (geoJsonVillages.value || isLoading.value) return
+    isLoading.value = true
+    if (geojsonWorker) {
+      geojsonWorker.postMessage({ type: 'desa', filterVal: mapFilterKabupaten.value })
+    }
+  }
+
+
+
 
   function openBalitaDetail(balita) {
     selectedBalita.value = balita
@@ -382,8 +492,9 @@ export const useStuntingStore = defineStore('stunting', () => {
     showHeatmap,
     showMarkers,
     showCluster,
-    showPuskesmasBuffer,
-    bufferRadiusKm,
+    // GeoJSON Region Filters
+    mapFilterProvince,
+    mapFilterKabupaten,
     // Selection Modals
     selectedBalita,
     isBalitaModalOpen,
@@ -393,6 +504,8 @@ export const useStuntingStore = defineStore('stunting', () => {
     // GeoJSON & Relational Mock Data
     geoJsonData,
     geoJsonRegencies,
+    geoJsonDistricts,
+    geoJsonVillages,
     isLoading,
     mapInstance,
     kecamatanList,
@@ -413,6 +526,9 @@ export const useStuntingStore = defineStore('stunting', () => {
     kecamatanRanking,
     // Actions
     loadGeoJson,
+    loadKecamatanGeoJson,
+    loadKelurahanGeoJson,
+    featureBBoxIndex,
     openBalitaDetail,
     closeBalitaDetail,
     openRegionDetail,
@@ -425,5 +541,6 @@ export const useStuntingStore = defineStore('stunting', () => {
     searchChildPublic,
     closePublicSearchModal
   }
+
 
 })

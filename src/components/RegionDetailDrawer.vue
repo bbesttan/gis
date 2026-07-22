@@ -118,13 +118,20 @@ const regionColor = computed(() => {
 
 const regionRank = computed(() => {
   const name = store.selectedRegion?.name
-  const idx = store.kecamatanRanking.findIndex(k => k.name === name)
+  if (!name) return 2
+  const normName = name.toLowerCase().replace(/\s+/g, '')
+  const idx = store.kecamatanRanking.findIndex(k => (k.name || '').toLowerCase().replace(/\s+/g, '') === normName)
   return idx !== -1 ? idx + 1 : 2
 })
 
 const regionPosyanduList = computed(() => {
   const name = store.selectedRegion?.name
-  return store.posyanduList.filter(p => p.desa === name || p.kecamatan === name)
+  if (!name) return []
+  const normName = name.toLowerCase().replace(/\s+/g, '')
+  return store.posyanduList.filter(p => 
+    (p.desa || '').toLowerCase().replace(/\s+/g, '') === normName || 
+    (p.kecamatan || '').toLowerCase().replace(/\s+/g, '') === normName
+  )
 })
 
 function handleWhatsApp() {
