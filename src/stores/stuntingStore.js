@@ -13,7 +13,17 @@ import { geoJsonToProvinceMap } from '../data/provinceMapping.js'
 
 export const useStuntingStore = defineStore('stunting', () => {
   // Navigation State
-  const activeTab = ref('map') // 'map' | 'dashboard' | 'table' | 'hotspot'
+  const activeTab = ref('landing') // 'landing' | 'map' | 'dashboard' | 'table' | 'hotspot'
+
+  // Role & Authentication State
+  const userRole = ref('guest') // 'guest' | 'admin'
+  const adminUser = ref(null)
+  const isAdminLoginModalOpen = ref(false)
+
+  // Public Search State (Landing Page)
+  const publicSearchResult = ref(null)
+  const isPublicSearchModalOpen = ref(false)
+  const publicSearchQuery = ref('')
 
   // Timeline & Filter State
   const selectedYear = ref(2024)
@@ -28,6 +38,11 @@ export const useStuntingStore = defineStore('stunting', () => {
   const selectedAgeGroup = ref('all') // '0-6', '6-12', '12-24', '24-59'
   const searchQuery = ref('')
   const isFilterExpanded = ref(false)
+
+  // ShareInsight Filter State
+  const selectedTypes = ref(['School'])
+  const selectedProvinces = ref(['West Java', 'DKI Jakarta'])
+  const selectedCities = ref(['Depok'])
 
   // GIS Map Layer Settings
   const activeBasemap = ref('dark') // 'dark' | 'osm' | 'satellite' | 'terrain' | 'light'
@@ -48,6 +63,7 @@ export const useStuntingStore = defineStore('stunting', () => {
 
   // Data Loading & Map State
   const geoJsonData = ref(null)
+  const geoJsonRegencies = ref(null)
   const isLoading = ref(false)
   const mapInstance = ref(null)
 
@@ -119,6 +135,54 @@ export const useStuntingStore = defineStore('stunting', () => {
         if (selectedAgeGroup.value === '24-59' && (age <= 24 || age > 59)) return false
       }
 
+      // Type filter (mapped to statusStunting)
+      const typeMap = {
+        'Office': 'Normal',
+        'Cafe': 'Risiko Stunting',
+        'School': 'Pendek',
+        'University': 'Sangat Pendek'
+      }
+      if (selectedTypes.value && selectedTypes.value.length > 0) {
+        const allowedStatuses = selectedTypes.value.map(t => typeMap[t]).filter(Boolean)
+        if (!allowedStatuses.includes(b.statusStunting)) return false
+      } else if (selectedTypes.value) {
+        return false // if types are empty (nothing checked), show nothing
+      }
+
+      // Province filter (mapped to Kecamatan)
+      const provinceMap = {
+        'West Java': ['Beji', 'Pancoran Mas', 'Sukmajaya', 'Sawangan'],
+        'DKI Jakarta': ['Cimanggis', 'Tapos'],
+        'South Tangerang': ['Limo', 'Bojongsari'],
+        'Central Java': []
+      }
+      if (selectedProvinces.value && selectedProvinces.value.length > 0) {
+        let allowedKecamatans = []
+        selectedProvinces.value.forEach(p => {
+          if (provinceMap[p]) allowedKecamatans.push(...provinceMap[p])
+        })
+        if (!allowedKecamatans.includes(b.kecamatan)) return false
+      } else if (selectedProvinces.value) {
+        return false
+      }
+
+      // City filter (mapped to Kecamatan)
+      const cityMap = {
+        'Depok': ['Beji', 'Pancoran Mas', 'Sukmajaya', 'Cimanggis', 'Sawangan', 'Limo', 'Tapos', 'Bojongsari'],
+        'Bandung': [],
+        'Bekasi': [],
+        'Bogor': []
+      }
+      if (selectedCities.value && selectedCities.value.length > 0) {
+        let allowedKecamatans = []
+        selectedCities.value.forEach(c => {
+          if (cityMap[c]) allowedKecamatans.push(...cityMap[c])
+        })
+        if (!allowedKecamatans.includes(b.kecamatan)) return false
+      } else if (selectedCities.value) {
+        return false
+      }
+
       return true
     })
   })
@@ -178,11 +242,17 @@ export const useStuntingStore = defineStore('stunting', () => {
 
   // Actions
   async function loadGeoJson() {
-    if (geoJsonData.value) return
+    if (geoJsonData.value && geoJsonRegencies.value) return
     isLoading.value = true
     try {
-      const response = await fetch('/data/indonesia-provinces.geojson')
-      geoJsonData.value = await response.json()
+      if (!geoJsonData.value) {
+        const response = await fetch('/data/indonesia-provinces.geojson')
+        geoJsonData.value = await response.json()
+      }
+      if (!geoJsonRegencies.value) {
+        const responseReg = await fetch('/data/indonesia-regencies.geojson')
+        geoJsonRegencies.value = await responseReg.json()
+      }
     } catch (error) {
       console.error('Failed to load GeoJSON:', error)
     } finally {
@@ -223,11 +293,70 @@ export const useStuntingStore = defineStore('stunting', () => {
     selectedStatusStunting.value = 'all'
     selectedAgeGroup.value = 'all'
     searchQuery.value = ''
+    selectedTypes.value = ['School']
+    selectedProvinces.value = ['West Java', 'DKI Jakarta']
+    selectedCities.value = ['Depok']
+  }
+
+  function openAdminLoginModal() {
+    isAdminLoginModalOpen.value = true
+  }
+
+  function closeAdminLoginModal() {
+    isAdminLoginModalOpen.value = false
+  }
+
+  function loginAsAdmin(roleType = 'posyandu') {
+    userRole.value = 'admin'
+    if (roleType === 'dinas') {
+      adminUser.value = {
+        name: 'dr. Haryo Wibowo',
+        role: 'Dinas Kesehatan Kota Depok',
+        avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=100&auto=format&fit=crop&q=80'
+      }
+    } else {
+      adminUser.value = {
+        name: 'Siti Rahmah',
+        role: 'Kader Posyandu Beji',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'
+      }
+    }
+    isAdminLoginModalOpen.value = false
+    return true
+  }
+
+  function logout() {
+    userRole.value = 'guest'
+    adminUser.value = null
+    activeTab.value = 'landing'
+  }
+
+  function searchChildPublic(query) {
+    if (!query || !query.trim()) return
+    const q = query.trim().toLowerCase()
+    publicSearchQuery.value = query.trim()
+    const match = balitaList.value.find(b =>
+      b.name.toLowerCase().includes(q) ||
+      b.nik.includes(q) ||
+      b.parentName.toLowerCase().includes(q)
+    )
+    publicSearchResult.value = match || null
+    isPublicSearchModalOpen.value = true
+  }
+
+  function closePublicSearchModal() {
+    isPublicSearchModalOpen.value = false
   }
 
   return {
-    // Navigation
+    // Navigation & Roles
     activeTab,
+    userRole,
+    adminUser,
+    isAdminLoginModalOpen,
+    publicSearchResult,
+    isPublicSearchModalOpen,
+    publicSearchQuery,
     // Filters & Timeline
     selectedYear,
     selectedMonth,
@@ -243,6 +372,9 @@ export const useStuntingStore = defineStore('stunting', () => {
     isFilterExpanded,
     availableYears,
     availableMonths,
+    selectedTypes,
+    selectedProvinces,
+    selectedCities,
     // GIS Map Settings
     activeBasemap,
     showChoropleth,
@@ -260,6 +392,7 @@ export const useStuntingStore = defineStore('stunting', () => {
     regionType,
     // GeoJSON & Relational Mock Data
     geoJsonData,
+    geoJsonRegencies,
     isLoading,
     mapInstance,
     kecamatanList,
@@ -284,6 +417,13 @@ export const useStuntingStore = defineStore('stunting', () => {
     closeBalitaDetail,
     openRegionDetail,
     closeRegionDetail,
-    resetAllFilters
+    resetAllFilters,
+    openAdminLoginModal,
+    closeAdminLoginModal,
+    loginAsAdmin,
+    logout,
+    searchChildPublic,
+    closePublicSearchModal
   }
+
 })

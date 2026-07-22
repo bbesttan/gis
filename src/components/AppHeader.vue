@@ -1,22 +1,8 @@
 <template>
   <header class="app-header">
     <div class="header-container">
-      <!-- Left: Logo & Title -->
-      <div class="header-left">
-        <div class="logo-box">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <path d="m12 2 4 10-4 10-4-10z" />
-          </svg>
-        </div>
-        <div class="brand-info">
-          <h1 class="brand-title">ShareInsight <span class="brand-badge">GIS Stunting</span></h1>
-          <p class="brand-sub">Sistem Informasi Geografis Pemantauan Stunting</p>
-        </div>
-      </div>
-
-      <!-- Center: Global Search Bar (ShareInsight style) -->
-      <div class="header-center">
+      <!-- Left: Global Search Bar (ShareInsight style) -->
+      <div class="header-left-search">
         <div class="search-box">
           <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8" />
@@ -64,6 +50,18 @@
         <!-- View Mode Navigation Tabs -->
         <div class="view-tabs">
           <button
+            :class="['tab-btn', { active: store.activeTab === 'landing' }]"
+            @click="store.activeTab = 'landing'"
+            title="Landing Page Beranda"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            <span>Beranda</span>
+          </button>
+
+          <button
             :class="['tab-btn', { active: store.activeTab === 'map' }]"
             @click="store.activeTab = 'map'"
             title="Interactive Map"
@@ -78,7 +76,7 @@
 
           <button
             :class="['tab-btn', { active: store.activeTab === 'dashboard' }]"
-            @click="store.activeTab = 'dashboard'"
+            @click="handleTabClick('dashboard')"
             title="Dashboard Statistics"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -88,11 +86,12 @@
               <rect x="3" y="16" width="7" height="5" rx="1" />
             </svg>
             <span>Dashboard</span>
+            <span v-if="store.userRole !== 'admin'" class="lock-tag">🔒 Admin</span>
           </button>
 
           <button
             :class="['tab-btn', { active: store.activeTab === 'table' }]"
-            @click="store.activeTab = 'table'"
+            @click="handleTabClick('table')"
             title="Data Table"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -103,21 +102,23 @@
               <line x1="15" x2="15" y1="3" y2="21" />
             </svg>
             <span>Data Balita</span>
+            <span v-if="store.userRole !== 'admin'" class="lock-tag">🔒 Admin</span>
           </button>
 
           <button
             :class="['tab-btn', { active: store.activeTab === 'hotspot' }]"
-            @click="store.activeTab = 'hotspot'"
+            @click="handleTabClick('hotspot')"
             title="Analisis & KPI"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
             </svg>
             <span>Hotspot & KPI</span>
+            <span v-if="store.userRole !== 'admin'" class="lock-tag">🔒 Admin</span>
           </button>
         </div>
 
-        <!-- Quick Tools -->
+        <!-- Quick Tools & Role Auth Badge -->
         <div class="user-tools">
           <button class="tool-btn" @click="toggleTheme" :title="theme === 'dark' ? 'Ganti ke Mode Terang' : 'Ganti ke Mode Gelap'">
             <svg v-if="theme === 'dark'" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -128,18 +129,25 @@
             </svg>
           </button>
 
-          <!-- User Avatar Profile -->
-          <div class="user-profile">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="User Avatar" class="user-avatar" />
+          <!-- User Role Status Box -->
+          <div v-if="store.userRole === 'admin'" class="user-profile admin-active">
+            <img :src="store.adminUser?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'" alt="Admin Avatar" class="user-avatar" />
             <div class="user-text">
-              <span class="user-name">David Oscar</span>
-              <span class="user-role">Analik GIS & Stunting</span>
+              <span class="user-name">{{ store.adminUser?.name || 'Admin Officer' }}</span>
+              <span class="user-role font-mono text-green-500">✓ {{ store.adminUser?.role || 'Admin' }}</span>
             </div>
+            <button class="logout-btn" @click="store.logout" title="Keluar Mode Admin">Logout</button>
+          </div>
+
+          <div v-else class="user-profile guest-mode" @click="store.openAdminLoginModal">
+            <span class="guest-pill">Mode Pengunjung</span>
+            <button class="login-trigger-btn">Login Admin</button>
           </div>
         </div>
       </div>
     </div>
   </header>
+
 </template>
 
 <script setup>
@@ -154,6 +162,14 @@ const { info } = useToast()
 
 const isSearching = ref(false)
 
+function handleTabClick(tab) {
+  if (store.userRole !== 'admin') {
+    store.openAdminLoginModal()
+  } else {
+    store.activeTab = tab
+  }
+}
+
 const searchResults = computed(() => {
   if (!store.searchQuery || store.searchQuery.length < 2) return []
   return store.filteredBalita.slice(0, 5)
@@ -167,7 +183,62 @@ function handleSelectSearchItem(item) {
 </script>
 
 <style scoped>
+.lock-tag {
+  font-size: 0.65rem;
+  background: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-left: 4px;
+  font-weight: 700;
+}
+
+.guest-mode {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f5f9;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+}
+
+.guest-pill {
+  font-size: 0.75rem;
+  font-weight: 650;
+  color: #64748b;
+}
+
+.login-trigger-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.login-trigger-btn:hover { background: #15803d; }
+
+.logout-btn {
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.logout-btn:hover { background: #dc2626; }
+
 .app-header {
+
   background: var(--bg-header, #ffffff);
   border-bottom: 1px solid var(--border-color, #e2e8f0);
   padding: 10px 24px;
@@ -187,53 +258,7 @@ function handleSelectSearchItem(item) {
   margin: 0 auto;
 }
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.logo-box {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #f59e0b, #ef4444);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-}
-
-.brand-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-primary, #0f172a);
-  margin: 0;
-  line-height: 1.2;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.brand-badge {
-  background: rgba(245, 158, 11, 0.12);
-  color: #d97706;
-  font-size: 0.72rem;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-weight: 600;
-  border: 1px solid rgba(245, 158, 11, 0.25);
-}
-
-.brand-sub {
-  font-size: 0.75rem;
-  color: var(--text-secondary, #64748b);
-  margin: 2px 0 0;
-}
-
-.header-center {
+.header-left-search {
   flex: 1;
   max-width: 480px;
   position: relative;
@@ -432,7 +457,7 @@ function handleSelectSearchItem(item) {
 }
 
 @media (max-width: 1024px) {
-  .header-center {
+  .header-left-search {
     max-width: 280px;
   }
   .user-text {
@@ -447,7 +472,7 @@ function handleSelectSearchItem(item) {
   .header-container {
     flex-wrap: wrap;
   }
-  .header-center {
+  .header-left-search {
     order: 3;
     max-width: 100%;
     width: 100%;

@@ -33,8 +33,10 @@
             <span>Choropleth Stunting</span>
           </label>
           <div class="sub-options" v-if="store.showChoropleth">
-            <label class="radio-sub"><input type="radio" value="desa" v-model="store.choroplethLevel" /> Per Desa</label>
-            <label class="radio-sub"><input type="radio" value="kecamatan" v-model="store.choroplethLevel" /> Per Kecamatan</label>
+            <label class="radio-sub"><input type="radio" value="desa" v-model="store.choroplethLevel" /> Kelurahan (Depok)</label>
+            <label class="radio-sub"><input type="radio" value="kecamatan" v-model="store.choroplethLevel" /> Kecamatan (Depok)</label>
+            <label class="radio-sub"><input type="radio" value="kabupaten" v-model="store.choroplethLevel" /> Kota/Kabupaten (RI)</label>
+            <label class="radio-sub"><input type="radio" value="provinsi" v-model="store.choroplethLevel" /> Provinsi (RI)</label>
           </div>
 
           <label class="layer-toggle-item">

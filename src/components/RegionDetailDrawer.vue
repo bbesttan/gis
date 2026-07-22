@@ -12,10 +12,16 @@
         <!-- Drawer Header -->
         <div class="drawer-header">
           <span class="region-type-badge">
-            {{ store.regionType === 'desa' ? 'Kelurahan / Desa' : 'Wilayah Kecamatan' }}
+            {{ 
+              store.regionType === 'provinsi' ? 'Wilayah Provinsi' :
+              store.regionType === 'kabupaten' ? 'Kota / Kabupaten' :
+              store.regionType === 'kecamatan' ? 'Wilayah Kecamatan' :
+              'Kelurahan / Desa'
+            }}
           </span>
           <h2 class="region-name">{{ store.selectedRegion.name }}</h2>
-          <p class="region-sub" v-if="store.selectedRegion.kecamatanName">Kecamatan {{ store.selectedRegion.kecamatanName }}</p>
+          <p class="region-sub" v-if="store.selectedRegion.parentName">Provinsi {{ store.selectedRegion.parentName }}</p>
+          <p class="region-sub" v-else-if="store.selectedRegion.kecamatanName">Kecamatan {{ store.selectedRegion.kecamatanName }}</p>
         </div>
 
         <!-- Metric Display Card -->

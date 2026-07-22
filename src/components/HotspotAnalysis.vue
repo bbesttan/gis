@@ -138,12 +138,18 @@ const store = useStuntingStore()
 
 .analysis-card {
   background: var(--bg-surface, #ffffff);
-  border: 1px solid var(--border-color, #e2e8f0);
-  border-radius: 18px;
-  padding: 20px;
+  border: 1.5px solid #bbf7d0;
+  border-radius: 20px;
+  padding: 22px;
   display: flex;
   gap: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.06);
+  transition: all 0.2s ease;
+}
+
+.analysis-card:hover {
+  border-color: #22c55e;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.1);
 }
 
 .card-icon {
@@ -156,10 +162,10 @@ const store = useStuntingStore()
   flex-shrink: 0;
 }
 
-.card-icon.red { background: rgba(239, 68, 68, 0.12); color: #ef4444; }
-.card-icon.blue { background: rgba(59, 130, 246, 0.12); color: #3b82f6; }
-.card-icon.green { background: rgba(16, 185, 129, 0.12); color: #10b981; }
-.card-icon.purple { background: rgba(139, 92, 246, 0.12); color: #8b5cf6; }
+.card-icon.red { background: rgba(239, 68, 68, 0.12); color: #dc2626; }
+.card-icon.blue { background: rgba(59, 130, 246, 0.12); color: #2563eb; }
+.card-icon.green { background: rgba(34, 197, 94, 0.15); color: #16a34a; }
+.card-icon.purple { background: rgba(139, 92, 246, 0.12); color: #7c3aed; }
 
 .card-info {
   display: flex;
@@ -169,12 +175,13 @@ const store = useStuntingStore()
 }
 
 .card-info h3 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
   color: var(--text-primary, #0f172a);
   margin: 0;
 }
+
 
 .card-info p {
   font-size: 0.78rem;
