@@ -115,17 +115,17 @@ const yearlyTrendChartData = computed(() => {
       {
         label: 'Prevalensi Stunting (%)',
         data: store.yearlyTrend.map(y => y.percentage),
-        borderColor: '#ef4444',
-        backgroundColor: 'rgba(239, 68, 68, 0.15)',
+        borderColor: '#1F2937',
+        backgroundColor: 'rgba(31, 41, 55, 0.15)',
         fill: true,
         tension: 0.35,
-        pointBackgroundColor: '#ef4444',
+        pointBackgroundColor: '#1F2937',
         pointRadius: 5
       },
       {
         label: 'Target Pemerintah (%)',
         data: [25.0, 21.5, 15.0, 11.0],
-        borderColor: '#10b981',
+        borderColor: '#2563EB',
         borderDash: [5, 5],
         fill: false,
         pointRadius: 0
@@ -142,13 +142,13 @@ const kecamatanChartData = computed(() => {
       {
         label: 'Kasus Stunting',
         data: store.kecamatanRanking.map(k => k.stunting),
-        backgroundColor: '#ef4444',
+        backgroundColor: '#1F2937',
         borderRadius: 6
       },
       {
         label: 'Balita Normal',
         data: store.kecamatanRanking.map(k => k.count - k.stunting),
-        backgroundColor: '#10b981',
+        backgroundColor: '#60A5FA',
         borderRadius: 6
       }
     ]
@@ -167,7 +167,7 @@ const statusDoughnutChartData = computed(() => {
           store.riskCount || 2,
           store.normalCount || 3
         ],
-        backgroundColor: ['#ef4444', '#f59e0b', '#3b82f6', '#10b981']
+        backgroundColor: ['#1F2937', '#2563EB', '#60A5FA', '#DBEAFE']
       }
     ]
   }
@@ -305,11 +305,11 @@ const doughnutOptions = {
 .chart-badge {
   font-size: 0.7rem;
   font-weight: 800;
-  background: #dcfce7;
-  color: #15803d;
+  background: #dbeafe;
+  color: #2563eb;
   padding: 4px 10px;
   border-radius: 9999px;
-  border: 1px solid #86efac;
+  border: 1px solid #93c5fd;
 }
 
 

@@ -55,9 +55,9 @@ export const stuntingData = {
 
 // Helper: get color based on stunting percentage
 export function getStuntingColor(percentage) {
-  if (percentage < 10) return '#10B981'   // Emerald - Rendah
-  if (percentage <= 20) return '#F59E0B'  // Amber - Sedang
-  return '#EF4444'                        // Red - Tinggi
+  if (percentage < 10) return '#60A5FA'   // Sky Blue - Rendah
+  if (percentage <= 20) return '#2563EB'  // Blue - Sedang
+  return '#1F2937'                        // Navy - Tinggi
 }
 
 // Helper: get category label

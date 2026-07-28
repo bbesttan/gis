@@ -54,7 +54,7 @@ export const mockBalitaList = [
     zScore: -2.85,
     statusGizi: 'Gizi Kurang',
     statusStunting: 'Sangat Pendek',
-    statusColor: '#EF4444', // Red
+    statusColor: '#1F2937', // Navy
     photo: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=200&auto=format&fit=crop&q=80',
     parentName: 'Budi Santoso & Siti Aminah',
     parentPhone: '6281234567890',
@@ -88,7 +88,7 @@ export const mockBalitaList = [
     zScore: -2.15,
     statusGizi: 'Gizi Baik',
     statusStunting: 'Pendek',
-    statusColor: '#F59E0B', // Amber
+    statusColor: '#2563EB', // Blue
     photo: 'https://images.unsplash.com/photo-1595454223600-91fbddbbf255?w=200&auto=format&fit=crop&q=80',
     parentName: 'Hendra Wijaya & Rina Lestari',
     parentPhone: '6281298765432',
@@ -119,7 +119,7 @@ export const mockBalitaList = [
     zScore: -3.10,
     statusGizi: 'Gizi Buruk',
     statusStunting: 'Sangat Pendek',
-    statusColor: '#EF4444',
+    statusColor: '#1F2937',
     photo: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=200&auto=format&fit=crop&q=80',
     parentName: 'Agus Setiawan & Dewi Kartika',
     parentPhone: '6281311223344',
@@ -150,7 +150,7 @@ export const mockBalitaList = [
     zScore: -1.20,
     statusGizi: 'Gizi Baik',
     statusStunting: 'Risiko Stunting',
-    statusColor: '#3B82F6', // Blue
+    statusColor: '#60A5FA', // Sky Blue
     photo: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=200&auto=format&fit=crop&q=80',
     parentName: 'Rahmat Hidayat & Sri Mulyani',
     parentPhone: '6281599887766',
@@ -180,7 +180,7 @@ export const mockBalitaList = [
     zScore: 0.15,
     statusGizi: 'Gizi Baik',
     statusStunting: 'Normal',
-    statusColor: '#10B981', // Green
+    statusColor: '#DBEAFE', // Light Blue
     photo: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&auto=format&fit=crop&q=80',
     parentName: 'Fajar Nugraha & Maya Indah',
     parentPhone: '6281766554433',
@@ -210,7 +210,7 @@ export const mockBalitaList = [
     zScore: -2.95,
     statusGizi: 'Gizi Buruk',
     statusStunting: 'Sangat Pendek',
-    statusColor: '#EF4444',
+    statusColor: '#1F2937',
     photo: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&auto=format&fit=crop&q=80',
     parentName: 'Dedi Kurniawan & Yulia Eka',
     parentPhone: '6281800112233',
@@ -240,7 +240,7 @@ export const mockBalitaList = [
     zScore: -1.85,
     statusGizi: 'Gizi Baik',
     statusStunting: 'Risiko Stunting',
-    statusColor: '#3B82F6',
+    statusColor: '#60A5FA',
     photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80',
     parentName: 'Muhammad Ali & Zahra Nur',
     parentPhone: '6281988776655',
@@ -270,7 +270,7 @@ export const mockBalitaList = [
     zScore: 0.40,
     statusGizi: 'Gizi Baik',
     statusStunting: 'Normal',
-    statusColor: '#10B981',
+    statusColor: '#DBEAFE',
     photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80',
     parentName: 'Taufik Hidayat & Intan Permata',
     parentPhone: '6281233445566',

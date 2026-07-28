@@ -221,10 +221,10 @@ function handleSelectSearchItem(item) {
   cursor: pointer;
 }
 
-.login-trigger-btn:hover { background: #15803d; }
+.login-trigger-btn:hover { background: #1f2937; }
 
 .logout-btn {
-  background: #ef4444;
+  background: #1f2937;
   color: #ffffff;
   border: none;
   padding: 3px 8px;

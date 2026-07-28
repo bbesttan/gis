@@ -5,33 +5,33 @@
    =================================================== */
 
 :root {
-  /* Fresh Eco Light Mode Palette (Matches Landing Page Design) */
-  --bg-app: #f0fdf4;
+  /* Brand Style Guide Light Mode Palette */
+  --bg-app: #f3f4f6;
   --bg-surface: #ffffff;
   --bg-header: #ffffff;
-  --bg-input: #f8fafc;
-  --bg-hover: #dcfce7;
-  --border-color: #e2e8f0;
-  --border-eco: #bbf7d0;
-  --primary-green: #16a34a;
-  --accent-green: #22c55e;
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
+  --bg-input: #f9fafb;
+  --bg-hover: #dbeafe;
+  --border-color: #e5e7eb;
+  --border-eco: #dbeafe;
+  --primary-green: #2563eb; /* Primary Blue */
+  --accent-green: #60a5fa; /* Sky Blue */
+  --text-primary: #1f2937; /* Dark Navy */
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
 }
 
 
 .dark-theme {
-  /* Dark Mode Palette */
-  --bg-app: #0f172a;
-  --bg-surface: #1e293b;
-  --bg-header: rgba(15, 23, 42, 0.9);
-  --bg-input: #334155;
-  --bg-hover: #475569;
-  --border-color: rgba(148, 163, 184, 0.15);
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #64748b;
+  /* Brand Style Guide Dark Mode Palette */
+  --bg-app: #1f2937; /* Dark Navy as main background */
+  --bg-surface: #111827;
+  --bg-header: rgba(31, 41, 55, 0.9);
+  --bg-input: #374151;
+  --bg-hover: #1f2937;
+  --border-color: rgba(156, 163, 175, 0.15);
+  --text-primary: #f9fafb;
+  --text-secondary: #e5e7eb;
+  --text-muted: #9ca3af;
 }
 
 * {
@@ -46,7 +46,7 @@ html, body {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: var(--bg-app);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
@@ -81,7 +81,7 @@ body {
 /* Leaflet Container Fixes & Preflight Protection */
 .leaflet-container {
   background: var(--bg-app) !important;
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .leaflet-container img {

@@ -96,12 +96,12 @@
               <td><strong>#{{ idx + 1 }}</strong></td>
               <td><strong>Kec. {{ kec.name }}</strong></td>
               <td>{{ kec.count }} anak</td>
-              <td class="text-red"><strong>{{ kec.stunting }} anak</strong></td>
+              <td class="text-navy"><strong>{{ kec.stunting }} anak</strong></td>
               <td>
                 <div class="rate-progress">
                   <span>{{ kec.rate }}%</span>
                   <div class="progress-bar-bg">
-                    <div class="progress-fill" :style="{ width: Math.min(kec.rate * 3, 100) + '%', backgroundColor: kec.rate > 20 ? '#ef4444' : kec.rate > 10 ? '#f59e0b' : '#10b981' }"></div>
+                    <div class="progress-fill" :style="{ width: Math.min(kec.rate * 3, 100) + '%', backgroundColor: kec.rate > 20 ? '#1F2937' : kec.rate > 10 ? '#2563EB' : '#60A5FA' }"></div>
                   </div>
                 </div>
               </td>
@@ -144,14 +144,14 @@ const store = useStuntingStore()
   display: flex;
   align-items: center;
   gap: 14px;
-  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.06);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.06);
   transition: all 0.25s ease;
 }
 
 .kpi-card:hover {
   transform: translateY(-3px);
-  border-color: #22c55e;
-  box-shadow: 0 10px 24px rgba(34, 197, 94, 0.12);
+  border-color: #2563eb;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.12);
 }
 
 .card-icon {
@@ -165,9 +165,9 @@ const store = useStuntingStore()
 }
 
 .kpi-card.blue .card-icon { background: rgba(59, 130, 246, 0.12); color: #2563eb; }
-.kpi-card.red .card-icon { background: rgba(239, 68, 68, 0.12); color: #dc2626; }
-.kpi-card.amber .card-icon { background: rgba(245, 158, 11, 0.12); color: #d97706; }
-.kpi-card.green .card-icon { background: rgba(34, 197, 94, 0.15); color: #16a34a; }
+.kpi-card.red .card-icon { background: rgba(31, 41, 55, 0.12); color: #1f2937; }
+.kpi-card.amber .card-icon { background: rgba(37, 99, 235, 0.12); color: #2563eb; }
+.kpi-card.green .card-icon { background: rgba(96, 165, 250, 0.12); color: #60a5fa; }
 .kpi-card.purple .card-icon { background: rgba(139, 92, 246, 0.12); color: #7c3aed; }
 
 .card-content {
@@ -196,10 +196,10 @@ const store = useStuntingStore()
 
 .priority-regions-card {
   background: var(--bg-surface, #ffffff);
-  border: 1.5px solid #bbf7d0;
+  border: 1.5px solid #93c5fd;
   border-radius: 20px;
   padding: 24px;
-  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.06);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.06);
 }
 
 .card-header-bar {
@@ -219,8 +219,8 @@ const store = useStuntingStore()
 
 .sub-tag {
   font-size: 0.75rem;
-  background: #dcfce7;
-  color: #15803d;
+  background: #dbeafe;
+  color: #2563eb;
   font-weight: 800;
   padding: 4px 10px;
   border-radius: 9999px;
@@ -238,12 +238,12 @@ const store = useStuntingStore()
 }
 
 .ranking-table th {
-  background: #f0fdf4;
-  color: #15803d;
+  background: #dbeafe;
+  color: #2563eb;
   font-weight: 800;
   text-align: left;
   padding: 12px 14px;
-  border-bottom: 2px solid #bbf7d0;
+  border-bottom: 2px solid #93c5fd;
 }
 
 .ranking-table td {
@@ -252,7 +252,7 @@ const store = useStuntingStore()
   color: #334155;
 }
 
-.text-red { color: #ef4444; }
+.text-navy { color: #1f2937; }
 
 .rate-progress {
   display: flex;
@@ -281,8 +281,8 @@ const store = useStuntingStore()
   border-radius: 8px;
 }
 
-.status-pill.red { background: rgba(239, 68, 68, 0.12); color: #ef4444; }
-.status-pill.amber { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
-.status-pill.green { background: rgba(16, 185, 129, 0.12); color: #10b981; }
+.status-pill.red { background: rgba(31, 41, 55, 0.12); color: #1f2937; }
+.status-pill.amber { background: rgba(37, 99, 235, 0.12); color: #2563eb; }
+.status-pill.green { background: rgba(96, 165, 250, 0.12); color: #60a5fa; }
 </style>
 
