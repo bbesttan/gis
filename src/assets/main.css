@@ -5,17 +5,21 @@
    =================================================== */
 
 :root {
-  /* Default Light Mode Palette (matches ShareInsight UI design) */
-  --bg-app: #f8fafc;
+  /* Fresh Eco Light Mode Palette (Matches Landing Page Design) */
+  --bg-app: #f0fdf4;
   --bg-surface: #ffffff;
   --bg-header: #ffffff;
-  --bg-input: #f1f5f9;
-  --bg-hover: #e2e8f0;
-  --border-color: #cbd5e1;
+  --bg-input: #f8fafc;
+  --bg-hover: #dcfce7;
+  --border-color: #e2e8f0;
+  --border-eco: #bbf7d0;
+  --primary-green: #16a34a;
+  --accent-green: #22c55e;
   --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
 }
+
 
 .dark-theme {
   /* Dark Mode Palette */

@@ -1,6 +1,7 @@
 import { ref, watchEffect } from 'vue'
 
-const currentTheme = ref(localStorage.getItem('gis_theme') || 'dark')
+const currentTheme = ref(localStorage.getItem('gis_theme') || 'light')
+
 
 export function useTheme() {
   function toggleTheme() {

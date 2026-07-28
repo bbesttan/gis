@@ -34,14 +34,6 @@
         <span>Tinggi</span>
       </div>
     </div>
-
-    <!-- Buffer Radius Legend -->
-    <div class="legend-body margin-t" v-if="store.showPuskesmasBuffer">
-      <div class="legend-row">
-        <span class="buffer-circle"></span>
-        <span class="label">Radius Puskesmas (3 KM)</span>
-      </div>
-    </div>
   </div>
 </template>
 

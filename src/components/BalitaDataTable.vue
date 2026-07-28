@@ -258,28 +258,28 @@ function handleWA(balita) {
   align-items: center;
   gap: 6px;
   padding: 8px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 9999px;
+  border: 1.5px solid #bbf7d0;
   background: var(--bg-surface, #ffffff);
-  color: var(--text-primary, #0f172a);
+  color: #15803d;
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 750;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .export-btn:hover {
-  background: var(--bg-hover, #f8fafc);
-  border-color: #3b82f6;
-  color: #3b82f6;
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #ffffff;
 }
 
 .table-card {
   background: var(--bg-surface, #ffffff);
-  border: 1px solid var(--border-color, #e2e8f0);
-  border-radius: 16px;
+  border: 1.5px solid #bbf7d0;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.06);
 }
 
 .table-responsive {
@@ -289,24 +289,25 @@ function handleWA(balita) {
 .modern-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
 }
 
 .modern-table th {
-  background: var(--bg-input, #f8fafc);
-  color: var(--text-secondary, #64748b);
+  background: #f0fdf4;
+  color: #15803d;
   text-align: left;
   padding: 12px 14px;
-  font-weight: 700;
-  border-bottom: 1px solid var(--border-color, #e2e8f0);
+  font-weight: 800;
+  border-bottom: 2px solid #bbf7d0;
   cursor: pointer;
   user-select: none;
 }
 
 .sort-ic {
   font-size: 0.7rem;
-  color: #3b82f6;
+  color: #16a34a;
 }
+
 
 .modern-table td {
   padding: 10px 14px;

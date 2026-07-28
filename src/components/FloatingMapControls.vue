@@ -33,8 +33,10 @@
             <span>Choropleth Stunting</span>
           </label>
           <div class="sub-options" v-if="store.showChoropleth">
-            <label class="radio-sub"><input type="radio" value="desa" v-model="store.choroplethLevel" /> Per Desa</label>
-            <label class="radio-sub"><input type="radio" value="kecamatan" v-model="store.choroplethLevel" /> Per Kecamatan</label>
+            <label class="radio-sub"><input type="radio" value="desa" v-model="store.choroplethLevel" /> Kelurahan / Desa</label>
+            <label class="radio-sub"><input type="radio" value="kecamatan" v-model="store.choroplethLevel" /> Kecamatan</label>
+            <label class="radio-sub"><input type="radio" value="kabupaten" v-model="store.choroplethLevel" /> Kota/Kabupaten</label>
+            <label class="radio-sub"><input type="radio" value="provinsi" v-model="store.choroplethLevel" /> Provinsi</label>
           </div>
 
           <label class="layer-toggle-item">
@@ -47,10 +49,20 @@
             <span>Cluster Marker Balita</span>
           </label>
 
-          <label class="layer-toggle-item">
-            <input type="checkbox" v-model="store.showPuskesmasBuffer" />
-            <span>Buffer Radius Puskesmas</span>
-          </label>
+          <!-- Geographic Region Filters to limit render weight -->
+          <div class="filter-region-section" v-if="store.showChoropleth && (store.choroplethLevel === 'kecamatan' || store.choroplethLevel === 'desa')">
+            <div class="filter-title">Filter Batas Wilayah</div>
+            
+            <div class="filter-field" v-if="store.choroplethLevel === 'kecamatan'">
+              <label>Batasi Provinsi:</label>
+              <input type="text" v-model="store.mapFilterProvince" class="filter-region-input" placeholder="Contoh: Jawa Barat" />
+            </div>
+
+            <div class="filter-field" v-if="store.choroplethLevel === 'desa'">
+              <label>Batasi Kota/Kab:</label>
+              <input type="text" v-model="store.mapFilterKabupaten" class="filter-region-input" placeholder="Contoh: Depok" />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -311,4 +323,46 @@ function handlePrintMap() {
   border-color: #3b82f6;
   transform: scale(1.08);
 }
+
+.filter-region-section {
+  margin-top: 8px;
+  border-top: 1px solid var(--border-color, #e2e8f0);
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.filter-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary, #64748b);
+  margin-bottom: 2px;
+}
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.filter-field label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+}
+.filter-region-input {
+  width: 100%;
+  padding: 4px 8px;
+  font-size: 0.74rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #e2e8f0);
+  background: var(--bg-app, #f8fafc);
+  color: var(--text-primary, #0f172a);
+  outline: none;
+}
+.filter-region-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
 </style>
+

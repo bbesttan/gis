@@ -263,12 +263,18 @@ const doughnutOptions = {
 
 .chart-card {
   background: var(--bg-surface, #ffffff);
-  border: 1px solid var(--border-color, #e2e8f0);
-  border-radius: 18px;
-  padding: 20px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1.5px solid #bbf7d0;
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.06);
   display: flex;
   flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.chart-card:hover {
+  border-color: #22c55e;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.1);
 }
 
 .chart-card.wide {
@@ -283,28 +289,29 @@ const doughnutOptions = {
 }
 
 .chart-header h3 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
   color: var(--text-primary, #0f172a);
   margin: 0;
 }
 
 .chart-sub {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   color: var(--text-secondary, #64748b);
   margin-top: 2px;
 }
 
 .chart-badge {
-  font-size: 0.68rem;
-  font-weight: 600;
-  background: var(--bg-input, #f1f5f9);
-  color: #3b82f6;
-  padding: 3px 8px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  font-size: 0.7rem;
+  font-weight: 800;
+  background: #dcfce7;
+  color: #15803d;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid #86efac;
 }
+
 
 .chart-body {
   height: 260px;

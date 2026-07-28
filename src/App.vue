@@ -1,42 +1,49 @@
 <template>
-  <div id="gis-stunting-app" :class="[theme + '-theme']">
-    <!-- Top Header Bar -->
-    <AppHeader />
+  <div id="gis-stunting-app" :class="[theme + '-theme']" class="app-layout">
+    <!-- If active tab is landing, render LandingPage full screen -->
+    <LandingPage v-if="store.activeTab === 'landing'" />
 
-    <!-- Main Workspace Layout -->
-    <div class="workspace-layout">
+    <!-- Otherwise, render the main dashboard layout -->
+    <template v-else>
       <!-- Left Sidebar Filter -->
       <SidebarFilter />
 
-      <!-- Center Main Content -->
-      <main class="main-content">
-        <!-- 1. Peta GIS View -->
-        <div v-show="store.activeTab === 'map'" class="view-panel map-view-panel">
-          <MapView />
-          <BottomChildCards />
-        </div>
+      <!-- Right Side Area (Header + Main Content) -->
+      <div class="main-container">
+        <!-- Top Header Bar -->
+        <AppHeader />
 
-        <!-- 2. Dashboard KPI & Ranking View -->
-        <div v-show="store.activeTab === 'dashboard'" class="view-panel scrollable-panel">
-          <DashboardKpi />
-          <StatisticsCharts class="margin-t" />
-        </div>
+        <!-- Center Main Content -->
+        <main class="main-content">
+          <!-- 1. Peta GIS View -->
+          <div v-show="store.activeTab === 'map'" class="view-panel map-view-panel">
+            <MapView />
+            <BottomChildCards />
+          </div>
 
-        <!-- 3. Data Table View -->
-        <div v-show="store.activeTab === 'table'" class="view-panel scrollable-panel">
-          <BalitaDataTable />
-        </div>
+          <!-- 2. Dashboard KPI & Ranking View -->
+          <div v-show="store.activeTab === 'dashboard'" class="view-panel scrollable-panel">
+            <DashboardKpi />
+            <StatisticsCharts class="margin-t" />
+          </div>
 
-        <!-- 4. Hotspot Analysis & Skripsi Value-Add View -->
-        <div v-show="store.activeTab === 'hotspot'" class="view-panel scrollable-panel">
-          <HotspotAnalysis />
-        </div>
-      </main>
-    </div>
+          <!-- 3. Data Table View -->
+          <div v-show="store.activeTab === 'table'" class="view-panel scrollable-panel">
+            <BalitaDataTable />
+          </div>
+
+          <!-- 4. Hotspot Analysis & Skripsi Value-Add View -->
+          <div v-show="store.activeTab === 'hotspot'" class="view-panel scrollable-panel">
+            <HotspotAnalysis />
+          </div>
+        </main>
+      </div>
+    </template>
 
     <!-- Modals & Overlays -->
     <ChildDetailModal />
     <RegionDetailDrawer />
+    <AdminLoginModal />
     <WhatsAppButton />
     <ToastNotification />
   </div>
@@ -45,6 +52,7 @@
 <script setup>
 import { useStuntingStore } from './stores/stuntingStore.js'
 import { useTheme } from './composables/useTheme.js'
+import LandingPage from './components/LandingPage.vue'
 import AppHeader from './components/AppHeader.vue'
 import SidebarFilter from './components/SidebarFilter.vue'
 import MapView from './components/MapView.vue'
@@ -55,26 +63,29 @@ import BalitaDataTable from './components/BalitaDataTable.vue'
 import HotspotAnalysis from './components/HotspotAnalysis.vue'
 import ChildDetailModal from './components/ChildDetailModal.vue'
 import RegionDetailDrawer from './components/RegionDetailDrawer.vue'
+import AdminLoginModal from './components/AdminLoginModal.vue'
 import WhatsAppButton from './components/WhatsAppButton.vue'
 import ToastNotification from './components/ToastNotification.vue'
+
 
 const store = useStuntingStore()
 const { theme } = useTheme()
 </script>
 
 <style scoped>
-#gis-stunting-app {
+.app-layout {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   background: var(--bg-app);
+  overflow: hidden;
 }
 
-.workspace-layout {
-  display: flex;
+.main-container {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   overflow: hidden;
-  position: relative;
 }
 
 .main-content {
