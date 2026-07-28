@@ -288,7 +288,7 @@ export const useStuntingStore = defineStore('stunting', () => {
       const promises = []
       if (!geoJsonData.value) {
         promises.push(
-          fetch('/data/gadm41_IDN_1.json')
+          fetch('/data/gadm41_IDN_1.geojson')
             .then(r => r.json())
             .then(data => {
               geoJsonData.value = data
@@ -298,7 +298,7 @@ export const useStuntingStore = defineStore('stunting', () => {
       }
       if (!geoJsonRegencies.value) {
         promises.push(
-          fetch('/data/gadm41_IDN_2.json')
+          fetch('/data/gadm41_IDN_2.geojson')
             .then(r => r.json())
             .then(data => {
               geoJsonRegencies.value = data

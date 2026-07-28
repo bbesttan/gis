@@ -6,7 +6,7 @@ self.onmessage = async (e) => {
   try {
     if (type === 'kecamatan') {
       if (!cacheKecamatan) {
-        const resp = await fetch('/data/gadm41_IDN_3.json');
+        const resp = await fetch('/data/gadm41_IDN_3.geojson');
         cacheKecamatan = await resp.json();
       }
       const prov = filterVal.toLowerCase().replace(/\s+/g, '').trim();
@@ -20,7 +20,7 @@ self.onmessage = async (e) => {
       self.postMessage({ success: true, type, data: filtered });
     } else if (type === 'desa') {
       if (!cacheDesa) {
-        const resp = await fetch('/data/gadm41_IDN_4.json');
+        const resp = await fetch('/data/gadm41_IDN_4.geojson');
         cacheDesa = await resp.json();
       }
       const kab = filterVal.toLowerCase().replace(/^(kota|kabupaten)\s*/, '').replace(/\s+/g, '').trim();
