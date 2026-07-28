@@ -8,20 +8,16 @@
     <!-- Choropleth Color Scale -->
     <div class="legend-body" v-if="store.showChoropleth">
       <div class="legend-row">
-        <span class="color-box red"></span>
-        <span class="label">Sangat Tinggi / Merah (&gt; 20%)</span>
-      </div>
-      <div class="legend-row">
-        <span class="color-box amber"></span>
-        <span class="label">Sedang / Kuning (10% - 20%)</span>
+        <span class="color-box navy"></span>
+        <span class="label">Tinggi / Navy (&gt; 20%)</span>
       </div>
       <div class="legend-row">
         <span class="color-box blue"></span>
-        <span class="label">Risiko Stunting / Biru</span>
+        <span class="label">Sedang / Biru (10% - 20%)</span>
       </div>
       <div class="legend-row">
-        <span class="color-box green"></span>
-        <span class="label">Rendah / Hijau (&lt; 10%)</span>
+        <span class="color-box sky"></span>
+        <span class="label">Rendah / Biru Langit (&lt; 10%)</span>
       </div>
     </div>
 
@@ -100,10 +96,9 @@ const store = useStuntingStore()
   flex-shrink: 0;
 }
 
-.color-box.red { background: #ef4444; }
-.color-box.amber { background: #f59e0b; }
-.color-box.blue { background: #3b82f6; }
-.color-box.green { background: #10b981; }
+.color-box.navy { background: #1F2937; border: 1px solid rgba(255, 255, 255, 0.15); }
+.color-box.blue { background: #2563EB; }
+.color-box.sky { background: #60A5FA; }
 
 .label {
   font-size: 0.75rem;
@@ -117,7 +112,7 @@ const store = useStuntingStore()
 .heatmap-gradient-bar {
   height: 8px;
   border-radius: 4px;
-  background: linear-gradient(to right, blue, cyan, lime, yellow, red);
+  background: linear-gradient(to right, #dbeafe, #60a5fa, #2563eb, #1f2937);
   margin-top: 4px;
 }
 

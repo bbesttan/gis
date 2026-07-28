@@ -3,16 +3,8 @@
     <!-- Brand Header (ShareInsight exact match) -->
     <div class="sidebar-brand">
       <div class="brand-logo-container" @click="store.activeTab = 'landing'" style="cursor: pointer;" title="Kembali ke Beranda">
-        <!-- Target / Crosshair logo (orange and indigo/blue) -->
         <div class="logo-target">
-          <svg viewBox="0 0 100 100" width="24" height="24">
-            <!-- Inner crosshair -->
-            <circle cx="50" cy="50" r="38" stroke="#4f46e5" stroke-width="8" fill="none" />
-            <circle cx="50" cy="50" r="18" stroke="#f97316" stroke-width="10" fill="none" />
-            <line x1="50" y1="5" x2="50" y2="95" stroke="#f97316" stroke-width="8" stroke-linecap="round" />
-            <line x1="5" y1="50" x2="95" y2="50" stroke="#f97316" stroke-width="8" stroke-linecap="round" />
-            <circle cx="50" cy="50" r="8" fill="#4f46e5" />
-          </svg>
+          <img src="/logo2.svg" alt="Logo" style="width: 24px; height: 24px; object-fit: contain;" />
         </div>
         <span class="brand-name" v-show="!isCollapsed">
           <span class="brand-text-share">Share</span><span class="brand-text-insight">Insight</span>
@@ -441,7 +433,7 @@ function showMoreAlert(section) {
 }
 
 .brand-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.2rem;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -449,11 +441,11 @@ function showMoreAlert(section) {
 }
 
 .brand-text-share {
-  color: #0f172a;
+  color: #1f2937;
 }
 
 .brand-text-insight {
-  color: #f97316;
+  color: #2563eb;
 }
 
 .dark-theme .brand-text-share {
@@ -578,7 +570,7 @@ function showMoreAlert(section) {
 }
 
 .text-orange {
-  color: #ea580c;
+  color: #2563eb;
   font-size: 0.72rem;
   text-transform: uppercase;
 }
@@ -815,10 +807,10 @@ function showMoreAlert(section) {
   flex-shrink: 0;
 }
 
-.color-dot.red { background: #ef4444; }
-.color-dot.yellow { background: #f59e0b; }
-.color-dot.blue { background: #3b82f6; }
-.color-dot.green { background: #10b981; }
+.color-dot.red { background: #1F2937; border: 1px solid rgba(0, 0, 0, 0.1); }
+.color-dot.yellow { background: #2563EB; }
+.color-dot.blue { background: #60A5FA; }
+.color-dot.green { background: #DBEAFE; border: 1px solid rgba(0, 0, 0, 0.1); }
 
 .item-text {
   flex: 1;

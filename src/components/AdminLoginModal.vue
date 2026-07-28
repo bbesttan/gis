@@ -143,8 +143,8 @@ const handleManualLogin = () => {
 }
 
 .demo-login-box {
-  background: #f0fdf4;
-  border: 1.5px solid #bbf7d0;
+  background: #dbeafe;
+  border: 1.5px solid #93c5fd;
   border-radius: 16px;
   padding: 18px;
   margin-bottom: 20px;
@@ -153,7 +153,7 @@ const handleManualLogin = () => {
 .demo-title {
   font-size: 0.72rem;
   font-weight: 800;
-  color: #15803d;
+  color: #2563eb;
   letter-spacing: 0.05em;
   display: block;
   margin-bottom: 12px;
@@ -180,12 +180,12 @@ const handleManualLogin = () => {
 }
 
 .btn-demo.green {
-  background: #16a34a;
+  background: #1F2937;
   color: #ffffff;
-  box-shadow: 0 4px 10px rgba(22, 163, 74, 0.2);
+  box-shadow: 0 4px 10px rgba(31, 41, 55, 0.2);
 }
 
-.btn-demo.green:hover { background: #15803d; }
+.btn-demo.green:hover { background: #111827; }
 
 .btn-demo.blue {
   background: #2563eb;

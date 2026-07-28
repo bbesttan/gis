@@ -5,14 +5,10 @@
       <div class="navbar-container">
         <div class="brand-logo" @click="navigateTo('landing')">
           <div class="logo-icon-wrapper">
-            <svg viewBox="0 0 100 100" width="34" height="34">
-              <circle cx="50" cy="50" r="42" fill="#22c55e" />
-              <path d="M50 18 Q65 38 50 80 Q35 38 50 18 Z" fill="#ffffff" />
-              <circle cx="50" cy="42" r="8" fill="#facc15" />
-            </svg>
+            <img src="/logo2.svg" alt="Logo" style="width: 34px; height: 34px; object-fit: contain;" />
           </div>
           <div class="brand-text">
-            <span class="brand-title">Share<span class="text-green-600">Insight</span></span>
+            <span class="brand-title">Share<span class="text-blue-600">Insight</span></span>
             <span class="brand-tag">GIS Stunting</span>
           </div>
         </div>
@@ -98,7 +94,7 @@
       <div class="section-container text-center">
         <h2 class="eco-section-title">
           Jelajahi Pemantauan Gizi & Posyandu <br />
-          <span class="text-green-600">Berbasis Wilayah Spasial</span>
+          <span class="text-blue-600">Berbasis Wilayah Spasial</span>
         </h2>
 
         <!-- Main Category Toggle Buttons (Green Pills matching Reference) -->
@@ -196,25 +192,25 @@
           <span class="hash-pill">#ZonasiRisiko</span>
         </div>
 
-        <!-- Big Rounded Green GIS Map Frame (Matching Reference Image Frame) -->
+        <!-- Big Rounded Blue GIS Map Frame (Matching Reference Image Frame) -->
         <div class="rounded-map-frame">
           <!-- Interactive Map Header Controls -->
           <div class="map-frame-header font-mono">
             <span class="flex items-center gap-2">
-              <span class="live-dot-green"></span>
+              <span class="live-dot-blue"></span>
               PETA_SPASIAL_STUNTING.DEPOK
             </span>
-            <span class="text-xs text-green-700">ZOOM: 12x | LAYER: CHOROPLETH</span>
+            <span class="text-xs text-blue-700">ZOOM: 12x | LAYER: CHOROPLETH</span>
           </div>
 
           <!-- Embedded SVG/Leaflet Map Container -->
           <div class="map-canvas-container">
             <svg viewBox="0 0 800 420" class="map-svg-canvas">
-              <!-- Regional Polygons (Subdistricts) -->
-              <path d="M40 50 L240 30 L320 140 L160 210 L50 170 Z" fill="rgba(34, 197, 94, 0.25)" stroke="#16a34a" stroke-width="2.5" />
-              <path d="M240 30 L520 40 L600 170 L420 250 L320 140 Z" fill="rgba(245, 158, 11, 0.25)" stroke="#d97706" stroke-width="2.5" />
-              <path d="M160 210 L320 140 L420 250 L280 390 L120 340 Z" fill="rgba(239, 68, 68, 0.25)" stroke="#dc2626" stroke-width="2.5" />
-              <path d="M420 250 L600 170 L750 220 L660 380 L480 360 Z" fill="rgba(34, 197, 94, 0.2)" stroke="#16a34a" stroke-width="2.5" />
+              <!-- Regional Polygons (Subdistricts) using Brand Monochromatic Blue Palette -->
+              <path d="M40 50 L240 30 L320 140 L160 210 L50 170 Z" fill="rgba(96, 165, 250, 0.25)" stroke="#60a5fa" stroke-width="2.5" />
+              <path d="M240 30 L520 40 L600 170 L420 250 L320 140 Z" fill="rgba(37, 99, 235, 0.25)" stroke="#2563eb" stroke-width="2.5" />
+              <path d="M160 210 L320 140 L420 250 L280 390 L120 340 Z" fill="rgba(31, 41, 55, 0.25)" stroke="#1f2937" stroke-width="2.5" />
+              <path d="M420 250 L600 170 L750 220 L660 380 L480 360 Z" fill="rgba(96, 165, 250, 0.2)" stroke="#60a5fa" stroke-width="2.5" />
 
               <!-- Buffer Concentric Circle -->
               <circle cx="340" cy="180" r="110" fill="rgba(59, 130, 246, 0.12)" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4" />
@@ -300,8 +296,8 @@
       <!-- Nature Hills Background SVG Edge (Matching Reference Image) -->
       <div class="hills-footer-edge">
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="hills-svg">
-          <path d="M0 60 Q 300 20, 600 50 T 1200 30 L 1200 120 L 0 120 Z" fill="#15803d" opacity="0.4" />
-          <path d="M0 80 Q 400 40, 800 70 T 1200 50 L 1200 120 L 0 120 Z" fill="#166534" />
+          <path d="M0 60 Q 300 20, 600 50 T 1200 30 L 1200 120 L 0 120 Z" fill="#2563EB" opacity="0.4" />
+          <path d="M0 80 Q 400 40, 800 70 T 1200 50 L 1200 120 L 0 120 Z" fill="#1F2937" />
         </svg>
       </div>
 
@@ -310,13 +306,9 @@
           <div class="footer-brand-col">
             <div class="brand-logo footer">
               <div class="logo-icon-wrapper">
-                <svg viewBox="0 0 100 100" width="30" height="30">
-                  <circle cx="50" cy="50" r="42" fill="#22c55e" />
-                  <path d="M50 18 Q65 38 50 80 Q35 38 50 18 Z" fill="#ffffff" />
-                  <circle cx="50" cy="42" r="8" fill="#facc15" />
-                </svg>
+                <img src="/logo2.svg" alt="Logo" style="width: 30px; height: 30px; object-fit: contain;" />
               </div>
-              <span class="brand-title text-white">ShareInsight <span class="text-green-400">GIS</span></span>
+              <span class="brand-title text-white">ShareInsight <span class="text-blue-400">GIS</span></span>
             </div>
             <p class="footer-tagline-eco">
               Sistem Informasi Geografis Pemantauan Gizi Anak & Pencegahan Stunting Nasional. Membantu Kader Posyandu & Pemerintah Daerah Berbasis Data Spasial Presisi.
@@ -601,8 +593,8 @@ const prevPage = () => {
 
 .brand-tag {
   font-size: 0.65rem;
-  background: #dcfce7;
-  color: #15803d;
+  background: #dbeafe;
+  color: #2563eb;
   padding: 2px 6px;
   border-radius: 4px;
   font-weight: 700;
@@ -622,8 +614,8 @@ const prevPage = () => {
   transition: color 0.2s ease;
 }
 
-.nav-item:hover { color: #16a34a; }
-.nav-item.highlight { color: #16a34a; font-weight: 750; }
+.nav-item:hover { color: #2563eb; }
+.nav-item.highlight { color: #2563eb; font-weight: 750; }
 
 .navbar-actions {
   display: flex;
@@ -632,7 +624,7 @@ const prevPage = () => {
 }
 
 .btn-green-pill {
-  background: #16a34a;
+  background: #2563eb;
   color: #ffffff;
   border: none;
   padding: 8px 20px;
@@ -643,12 +635,12 @@ const prevPage = () => {
   display: flex;
   align-items: center;
   gap: 6px;
-  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
   transition: all 0.2s ease;
 }
 
 .btn-green-pill:hover {
-  background: #15803d;
+  background: #1d4ed8;
   transform: translateY(-1px);
 }
 
@@ -664,7 +656,7 @@ const prevPage = () => {
   position: absolute;
   top: 100%; left: 0; right: 0;
   background: #ffffff;
-  border-bottom: 2px solid #22c55e;
+  border-bottom: 2px solid #2563eb;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -681,18 +673,23 @@ const prevPage = () => {
 }
 
 .btn-green-full {
-  background: #16a34a;
+  background: #2563eb;
   color: #ffffff;
   border: none;
   padding: 12px;
   border-radius: 12px;
   font-weight: 750;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-green-full:hover {
+  background: #1d4ed8;
 }
 
 /* SECTION 1: HERO WITH ILLUSTRATED BANNER & SEARCH BAR */
 .hero-illustrated-section {
-  background: #f0fdf4;
+  background: #f3f4f6;
   padding-bottom: 24px;
 }
 
@@ -757,7 +754,7 @@ const prevPage = () => {
   transition: background 0.2s ease;
 }
 
-.search-pill-btn:hover { background: #15803d; }
+.search-pill-btn:hover { background: #1f2937; }
 
 /* News Ticker Row */
 .news-ticker-container {
@@ -779,13 +776,13 @@ const prevPage = () => {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: #f0fdf4;
-  color: #15803d;
+  background: #dbeafe;
+  color: #2563eb;
   font-weight: 800;
   font-size: 0.82rem;
   padding: 6px 14px;
   border-radius: 9999px;
-  border: 1px solid #bbf7d0;
+  border: 1px solid #93c5fd;
   white-space: nowrap;
 }
 
@@ -984,15 +981,15 @@ const prevPage = () => {
 }
 
 .stat-tag {
-  background: #dcfce7;
-  color: #15803d;
+  background: #dbeafe;
+  color: #2563eb;
   font-weight: 700;
   padding: 2px 8px;
   border-radius: 4px;
 }
 
 .arrow-link {
-  color: #16a34a;
+  color: #2563eb;
   font-weight: 750;
 }
 
@@ -1000,8 +997,8 @@ const prevPage = () => {
 
 .btn-outline-green {
   background: transparent;
-  border: 2px solid #22c55e;
-  color: #15803d;
+  border: 2px solid #2563eb;
+  color: #2563eb;
   padding: 10px 28px;
   border-radius: 9999px;
   font-weight: 750;
@@ -1011,7 +1008,7 @@ const prevPage = () => {
 }
 
 .btn-outline-green:hover {
-  background: #22c55e;
+  background: #2563eb;
   color: #ffffff;
 }
 
@@ -1060,8 +1057,8 @@ const prevPage = () => {
 
 .hash-pill {
   background: #ffffff;
-  color: #16a34a;
-  border: 1.5px solid #86efac;
+  color: #2563eb;
+  border: 1.5px solid #93c5fd;
   font-weight: 700;
   font-size: 0.8rem;
   padding: 4px 14px;
@@ -1073,30 +1070,30 @@ const prevPage = () => {
   max-width: 960px;
   margin: 0 auto;
   background: #ffffff;
-  border: 4px solid #22c55e;
+  border: 4px solid #2563eb;
   border-radius: 28px;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(14, 165, 233, 0.15);
+  box-shadow: 0 20px 50px rgba(37, 99, 235, 0.15);
 }
 
 .map-frame-header {
-  background: #f0fdf4;
-  border-bottom: 2px solid #bbf7d0;
+  background: #f3f4f6;
+  border-bottom: 2px solid #e5e7eb;
   padding: 12px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: 700;
   font-size: 0.82rem;
-  color: #15803d;
+  color: #1f2937;
 }
 
-.live-dot-green {
+.live-dot-blue {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+  background: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
   display: inline-block;
 }
 
@@ -1120,7 +1117,7 @@ const prevPage = () => {
 .map-pill-marker {
   position: absolute;
   pointer-events: auto;
-  background: #22c55e;
+  background: #2563eb;
   color: #ffffff;
   border: 2px solid #ffffff;
   padding: 6px 14px;
@@ -1136,7 +1133,7 @@ const prevPage = () => {
 }
 
 .map-pill-marker:hover {
-  background: #15803d;
+  background: #1d4ed8;
   transform: scale(1.05);
 }
 
@@ -1155,7 +1152,7 @@ const prevPage = () => {
 }
 
 .map-ctrl-btn {
-  background: #22c55e;
+  background: #2563eb;
   color: #ffffff;
   border: 2px solid #ffffff;
   width: 36px;
@@ -1173,7 +1170,7 @@ const prevPage = () => {
 .map-cta-row { margin-top: 36px; }
 
 .btn-green-lg {
-  background: #16a34a;
+  background: #2563eb;
   color: #ffffff;
   border: none;
   padding: 14px 36px;
@@ -1184,12 +1181,12 @@ const prevPage = () => {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.3);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
   transition: all 0.2s ease;
 }
 
 .btn-green-lg:hover {
-  background: #15803d;
+  background: #1d4ed8;
   transform: translateY(-2px);
 }
 
@@ -1213,8 +1210,8 @@ const prevPage = () => {
 }
 
 .sprout-badge {
-  background: #dcfce7;
-  color: #15803d;
+  background: #dbeafe;
+  color: #2563eb;
   font-weight: 800;
   font-size: 0.78rem;
   padding: 4px 12px;
@@ -1294,7 +1291,7 @@ const prevPage = () => {
 
 /* SECTION 5: ILLUSTRATED NATURE FOOTER */
 .eco-footer {
-  background: #15803d;
+  background: #1F2937;
   color: #ffffff;
   position: relative;
   padding-top: 40px;
@@ -1416,15 +1413,15 @@ const prevPage = () => {
   padding: 32px;
   position: relative;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-  border: 3px solid #22c55e;
+  border: 3px solid #2563eb;
 }
 
 .public-header-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #dcfce7;
-  color: #15803d;
+  background: #dbeafe;
+  color: #2563eb;
   font-weight: 800;
   font-size: 0.8rem;
   padding: 4px 12px;
@@ -1485,14 +1482,14 @@ const prevPage = () => {
 }
 
 .posyandu-location-box {
-  background: #f0fdf4;
-  border: 1.5px solid #bbf7d0;
+  background: #dbeafe;
+  border: 1.5px solid #93c5fd;
   border-radius: 14px;
   padding: 14px;
   margin-bottom: 16px;
 }
 
-.loc-head { font-size: 0.68rem; color: #15803d; font-weight: 800; margin-bottom: 4px; }
+.loc-head { font-size: 0.68rem; color: #2563eb; font-weight: 800; margin-bottom: 4px; }
 .loc-title { font-size: 1rem; font-weight: 800; color: #0f172a; }
 .loc-sub { font-size: 0.78rem; color: #475569; margin-top: 2px; }
 

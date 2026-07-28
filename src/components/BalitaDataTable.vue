@@ -259,9 +259,9 @@ function handleWA(balita) {
   gap: 6px;
   padding: 8px 14px;
   border-radius: 9999px;
-  border: 1.5px solid #bbf7d0;
+  border: 1.5px solid #93c5fd;
   background: var(--bg-surface, #ffffff);
-  color: #15803d;
+  color: #2563eb;
   font-size: 0.78rem;
   font-weight: 750;
   cursor: pointer;
@@ -269,17 +269,17 @@ function handleWA(balita) {
 }
 
 .export-btn:hover {
-  background: #16a34a;
-  border-color: #16a34a;
+  background: #2563eb;
+  border-color: #2563eb;
   color: #ffffff;
 }
 
 .table-card {
   background: var(--bg-surface, #ffffff);
-  border: 1.5px solid #bbf7d0;
+  border: 1.5px solid #93c5fd;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.06);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.06);
 }
 
 .table-responsive {
@@ -293,12 +293,12 @@ function handleWA(balita) {
 }
 
 .modern-table th {
-  background: #f0fdf4;
-  color: #15803d;
+  background: #dbeafe;
+  color: #2563eb;
   text-align: left;
   padding: 12px 14px;
   font-weight: 800;
-  border-bottom: 2px solid #bbf7d0;
+  border-bottom: 2px solid #93c5fd;
   cursor: pointer;
   user-select: none;
 }

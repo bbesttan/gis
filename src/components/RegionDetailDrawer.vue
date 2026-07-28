@@ -111,9 +111,9 @@ const regionStuntingCount = computed(() => {
 
 const regionColor = computed(() => {
   const rate = regionRate.value
-  if (rate > 20) return '#ef4444'
-  if (rate > 10) return '#f59e0b'
-  return '#10b981'
+  if (rate > 20) return '#1F2937'
+  if (rate > 10) return '#2563EB'
+  return '#60A5FA'
 })
 
 const regionRank = computed(() => {

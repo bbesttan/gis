@@ -348,7 +348,7 @@ function renderChoroplethPolygons() {
       desas.forEach(d => {
         if (!d.polygon) return
         const kecRate = getKecamatanStuntingPercentage(d.kecamatanName)
-        const color = kecRate > 20 ? '#ef4444' : kecRate > 10 ? '#f59e0b' : '#10b981'
+        const color = kecRate > 20 ? '#1F2937' : kecRate > 10 ? '#2563EB' : '#60A5FA'
         const polygon = L.polygon(d.polygon, { color, fillColor: color, fillOpacity: 0.4, weight: 2 })
         polygon.bindTooltip(`
           <div class="custom-tooltip">
@@ -411,7 +411,7 @@ function renderChoroplethPolygons() {
       const desas = store.desaList
       desas.forEach(d => {
         if (!d.polygon) return
-        const color = d.stuntingRate > 20 ? '#ef4444' : d.stuntingRate > 10 ? '#f59e0b' : '#10b981'
+        const color = d.stuntingRate > 20 ? '#1F2937' : d.stuntingRate > 10 ? '#2563EB' : '#60A5FA'
         const polygon = L.polygon(d.polygon, {
           color: color,
           fillColor: color,

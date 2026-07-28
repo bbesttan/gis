@@ -148,8 +148,8 @@ const store = useStuntingStore()
 }
 
 .analysis-card:hover {
-  border-color: #22c55e;
-  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.1);
+  border-color: #2563eb;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
 }
 
 .card-icon {
@@ -162,9 +162,9 @@ const store = useStuntingStore()
   flex-shrink: 0;
 }
 
-.card-icon.red { background: rgba(239, 68, 68, 0.12); color: #dc2626; }
+.card-icon.red { background: rgba(31, 41, 55, 0.12); color: #1f2937; }
 .card-icon.blue { background: rgba(59, 130, 246, 0.12); color: #2563eb; }
-.card-icon.green { background: rgba(34, 197, 94, 0.15); color: #16a34a; }
+.card-icon.green { background: rgba(96, 165, 250, 0.12); color: #60a5fa; }
 .card-icon.purple { background: rgba(139, 92, 246, 0.12); color: #7c3aed; }
 
 .card-info {
@@ -258,8 +258,8 @@ const store = useStuntingStore()
   font-size: 0.9rem;
 }
 
-.cmp-num.red { color: #ef4444; }
-.cmp-num.green { color: #10b981; }
+.cmp-num.red { color: #1f2937; }
+.cmp-num.green { color: #2563eb; }
 
 .cmp-arrow {
   color: var(--text-secondary, #64748b);
@@ -294,8 +294,8 @@ const store = useStuntingStore()
   overflow: hidden;
 }
 
-.p-fill.green { background: #10b981; height: 100%; }
-.p-fill.blue { background: #3b82f6; height: 100%; }
+.p-fill.green { background: #60a5fa; height: 100%; }
+.p-fill.blue { background: #2563eb; height: 100%; }
 
 @media (max-width: 900px) {
   .analysis-grid {
